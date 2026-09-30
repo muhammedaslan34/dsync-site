@@ -51,7 +51,7 @@ const fr: Dict = {
   phone: {
     eyebrow: 'Application mobile',
     title: 'Votre téléphone est de la partie.',
-    text: "Envoyez des photos et des fichiers de votre téléphone vers un ordinateur, ou récupérez ce qu'un ordinateur vous a envoyé. Collez le presse-papiers du téléphone, renvoyez un lien, enregistrez ou partagez n'importe quel fichier.",
+    text: "Envoyez des photos et des fichiers de votre téléphone vers un ordinateur, ou récupérez ce qu'un ordinateur vous a envoyé. Collez le presse-papiers du téléphone, renvoyez un lien, enregistrez ou partagez n'importe quel fichier. Deux téléphones peuvent aussi se parler directement : l'un affiche un code QR, l'autre le scanne.",
     noteHtml:
       'Sur iPhone, installez le fichier avec <a href="https://altstore.io">AltStore</a> ou <a href="https://sideloadly.io">Sideloadly</a> et votre identifiant Apple (iOS 16.4 ou plus récent).',
   },

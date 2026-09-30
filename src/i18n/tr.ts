@@ -51,7 +51,7 @@ const tr: Dict = {
   phone: {
     eyebrow: 'Telefon uygulaması',
     title: 'Telefonun da aramıza katılıyor.',
-    text: 'Telefonundan bilgisayara fotoğraf ve dosya gönder ya da bilgisayarın sana gönderdiklerini al. Telefonunun panosunu yapıştır, bir bağlantıyı geri kopyala, istediğin dosyayı kaydet ya da paylaş.',
+    text: 'Telefonundan bilgisayara fotoğraf ve dosya gönder ya da bilgisayarın sana gönderdiklerini al. Telefonunun panosunu yapıştır, bir bağlantıyı geri kopyala, istediğin dosyayı kaydet ya da paylaş. İki telefon doğrudan da konuşabilir: biri QR kod gösterir, diğeri tarar.',
     noteHtml:
       'iPhone\'da dosyayı Apple Kimliğinle <a href="https://altstore.io">AltStore</a> ya da <a href="https://sideloadly.io">Sideloadly</a> kullanarak yükle (iOS 16.4 veya üstü).',
   },

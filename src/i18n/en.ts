@@ -52,7 +52,7 @@ const en = {
   phone: {
     eyebrow: 'Phone app',
     title: 'Your phone joins in.',
-    text: "Send photos and files from your phone to a computer, or pick up what a computer sent you. Paste your phone's clipboard, copy a link back, save or share any file.",
+    text: "Send photos and files from your phone to a computer, or pick up what a computer sent you. Paste your phone's clipboard, copy a link back, save or share any file. Two phones can talk directly too: one shows a QR code, the other scans it.",
     noteHtml:
       'On iPhone, install the file with <a href="https://altstore.io">AltStore</a> or <a href="https://sideloadly.io">Sideloadly</a> using your Apple ID (iOS 16.4 or later).',
   },
