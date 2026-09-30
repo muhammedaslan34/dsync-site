@@ -1,0 +1,12 @@
+---
+// The page in Arabic, Turkish and French, at /ar/, /tr/ and /fr/.
+import Landing from '../../components/Landing.astro'
+import { langs, type Lang } from '../../i18n'
+
+export function getStaticPaths() {
+  return langs.filter((l) => l.code !== 'en').map((l) => ({ params: { lang: l.code } }))
+}
+const lang = Astro.params.lang as Lang
+---
+
+<Landing lang={lang} />

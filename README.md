@@ -19,5 +19,13 @@ Pushing to `main` publishes the site in both places: Coolify builds the `Dockerf
 a GitHub webhook, and GitHub Actions builds GitHub Pages (`.github/workflows/deploy.yml`).
 It's also rebuilt every day, and can be run by hand from the Actions tab.
 
+## Languages
+
+English is at `/`, with Arabic (right to left), Turkish and French at `/ar/`, `/tr/` and
+`/fr/`. All the text lives in `src/i18n/*.ts`: `en.ts` is the source, and the other files
+must have the same shape (TypeScript checks this). A first visit to `/` switches to the
+visitor's language when there's a translation; a language picked in the menu is remembered.
+To add a language, copy `en.ts`, translate it, and add it to `langs` in `src/i18n/index.ts`.
+
 The screenshots in `src/assets` come from the dsync repo's `docs/screenshots`; they use
 demo data only.

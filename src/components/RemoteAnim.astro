@@ -1,6 +1,10 @@
 ---
 // Remote control, animated: the other computer's screen shows up on this
 // one, and the pointer moves on both at once.
+interface Props {
+  labels: { other: string; self: string; screen: string; input: string; label: string }
+}
+const { labels } = Astro.props
 
 // The other computer's desktop, drawn at 200x124 and placed twice.
 const desk = `
@@ -18,14 +22,14 @@ const desk = `
 `
 ---
 
-<svg class="remote-anim" viewBox="0 20 560 250" role="img" aria-label="This computer showing and controlling another computer's screen">
+<svg class="remote-anim" viewBox="0 20 560 250" role="img" aria-label={labels.label}>
   <!-- the other computer -->
   <g transform="translate(330 40)">
     <rect x="-8" y="-8" width="216" height="140" rx="10" class="ra-frame"/>
     <g set:html={desk} />
     <rect x="86" y="132" width="28" height="22" class="ra-stand"/>
     <rect x="62" y="152" width="76" height="8" rx="4" class="ra-stand"/>
-    <text x="100" y="186" class="ra-label">Office PC</text>
+    <text x="100" y="186" class="ra-label">{labels.other}</text>
   </g>
 
   <!-- this computer, showing it -->
@@ -33,18 +37,19 @@ const desk = `
     <rect x="-8" y="-8" width="216" height="140" rx="10" class="ra-frame"/>
     <g set:html={desk} />
     <path d="M-26 132h252l-14 14H-12z" class="ra-stand"/>
-    <text x="100" y="170" class="ra-label">This computer</text>
+    <text x="100" y="170" class="ra-label">{labels.self}</text>
   </g>
 
   <!-- the stream between them -->
   <path d="M322 92C290 70 270 70 246 92" class="ra-flow ra-screen"/>
   <path d="M246 128C270 150 290 150 322 128" class="ra-flow ra-input"/>
-  <text x="284" y="62" class="ra-small">screen</text>
-  <text x="284" y="170" class="ra-small">mouse &amp; keys</text>
+  <text x="284" y="62" class="ra-small">{labels.screen}</text>
+  <text x="284" y="170" class="ra-small">{labels.input}</text>
 </svg>
 
 <style>
   .remote-anim {
+    direction: ltr;
     width: 100%;
     height: auto;
     display: block;
