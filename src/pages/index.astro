@@ -54,6 +54,7 @@ const deskShot = { widths: [640, 1100, 1600], sizes: '(max-width: 820px) 92vw, 6
         <div class="actions">
           <a class="btn primary" href="#download">Download dsync</a>
           <a class="btn" href={r.android.href} data-dl="android">Get the Android app</a>
+          <a class="btn" href={r.ios.href} data-dl="ios">Get the iPhone app</a>
         </div>
         <div class="window">
           <Image src={chat} alt="dsync on Linux, talking with a Windows PC" loading="eager" {...deskShot} sizes="(max-width: 1100px) 92vw, 1040px" widths={[800, 1200, 2000]} />
@@ -95,8 +96,12 @@ const deskShot = { widths: [640, 1100, 1600], sizes: '(max-width: 820px) 92vw, 6
           </p>
           <div class="actions">
             <a class="btn primary" href={r.android.href} data-dl="android">Download for Android{r.android.size && <span class="muted-inline">APK · {r.android.size}</span>}</a>
-            <a class="btn" href="#iphone">iPhone</a>
+            <a class="btn" href={r.ios.href} data-dl="ios">Download for iPhone{r.ios.size && <span class="muted-inline">IPA · {r.ios.size}</span>}</a>
           </div>
+          <p class="note">
+            On iPhone, install the file with <a href="https://altstore.io">AltStore</a> or <a href="https://sideloadly.io">Sideloadly</a>
+            using your Apple ID (iOS 16.4 or later).
+          </p>
           <div slot="media" class="phones">
             <div class="phone"><Image src={phoneList} alt="Paired computers on the phone" {...phoneShot} /></div>
             <div class="phone raised"><Image src={phoneChat} alt="A conversation on the phone with a file to save" {...phoneShot} /></div>
@@ -344,6 +349,10 @@ const deskShot = { widths: [640, 1100, 1600], sizes: '(max-width: 820px) 92vw, 6
   .btn.primary:hover {
     background: var(--accent);
     filter: brightness(1.08);
+  }
+  .note {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
   }
   .muted-inline {
     font-weight: 500;
