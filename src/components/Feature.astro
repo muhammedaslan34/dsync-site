@@ -9,7 +9,7 @@ interface Props {
 const { eyebrow, title, flip = false, id } = Astro.props
 ---
 
-<section class:list={['feature', { flip }]} id={id}>
+<section class:list={['feature', 'reveal', { flip }]} id={id}>
   <div class="feature-text">
     <p class="eyebrow">{eyebrow}</p>
     <h2>{title}</h2>

@@ -1,0 +1,155 @@
+---
+// Remote control, animated: the other computer's screen shows up on this
+// one, and the pointer moves on both at once.
+
+// The other computer's desktop, drawn at 200x124 and placed twice.
+const desk = `
+  <rect width="200" height="124" rx="4" class="ra-wall"/>
+  <rect x="14" y="14" width="112" height="78" rx="5" class="ra-win"/>
+  <rect x="14" y="14" width="112" height="14" rx="5" class="ra-bar"/>
+  <rect x="24" y="38" width="70" height="5" rx="2.5" class="ra-line ra-type"/>
+  <rect x="24" y="50" width="88" height="5" rx="2.5" class="ra-line"/>
+  <rect x="24" y="62" width="54" height="5" rx="2.5" class="ra-line"/>
+  <rect x="82" y="74" width="36" height="12" rx="4" class="ra-btn"/>
+  <rect x="138" y="20" width="48" height="36" rx="5" class="ra-win2"/>
+  <rect x="138" y="64" width="48" height="36" rx="5" class="ra-win2"/>
+  <circle cx="100" cy="80" r="6" class="ra-click"/>
+  <g class="ra-cursor"><path d="M0 0v13l3.4-3.2 2.4 5.2 2.3-1-2.4-5.1H10z"/></g>
+`
+---
+
+<svg class="remote-anim" viewBox="0 20 560 250" role="img" aria-label="This computer showing and controlling another computer's screen">
+  <!-- the other computer -->
+  <g transform="translate(330 40)">
+    <rect x="-8" y="-8" width="216" height="140" rx="10" class="ra-frame"/>
+    <g set:html={desk} />
+    <rect x="86" y="132" width="28" height="22" class="ra-stand"/>
+    <rect x="62" y="152" width="76" height="8" rx="4" class="ra-stand"/>
+    <text x="100" y="186" class="ra-label">Office PC</text>
+  </g>
+
+  <!-- this computer, showing it -->
+  <g transform="translate(30 56)">
+    <rect x="-8" y="-8" width="216" height="140" rx="10" class="ra-frame"/>
+    <g set:html={desk} />
+    <path d="M-26 132h252l-14 14H-12z" class="ra-stand"/>
+    <text x="100" y="170" class="ra-label">This computer</text>
+  </g>
+
+  <!-- the stream between them -->
+  <path d="M322 92C290 70 270 70 246 92" class="ra-flow ra-screen"/>
+  <path d="M246 128C270 150 290 150 322 128" class="ra-flow ra-input"/>
+  <text x="284" y="62" class="ra-small">screen</text>
+  <text x="284" y="170" class="ra-small">mouse &amp; keys</text>
+</svg>
+
+<style>
+  .remote-anim {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .remote-anim :global(.ra-frame) {
+    fill: var(--bg);
+    stroke: var(--line);
+    stroke-width: 2;
+  }
+  .remote-anim :global(.ra-wall) {
+    fill: color-mix(in srgb, var(--accent) 14%, var(--soft));
+  }
+  .remote-anim :global(.ra-win) {
+    fill: var(--bg);
+  }
+  .remote-anim :global(.ra-bar) {
+    fill: color-mix(in srgb, var(--accent) 30%, var(--bg));
+  }
+  .remote-anim :global(.ra-win2) {
+    fill: color-mix(in srgb, var(--bg) 70%, transparent);
+  }
+  .remote-anim :global(.ra-line) {
+    fill: var(--line);
+  }
+  .remote-anim :global(.ra-btn) {
+    fill: var(--accent);
+    animation: ra-press 6s infinite;
+  }
+  .remote-anim :global(.ra-type) {
+    transform-box: fill-box;
+    transform-origin: left;
+    animation: ra-type 6s infinite;
+  }
+  .remote-anim :global(.ra-click) {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: ra-click 6s infinite;
+  }
+  .remote-anim :global(.ra-cursor) {
+    fill: var(--text);
+    stroke: var(--bg);
+    stroke-width: 1;
+    animation: ra-move 6s infinite ease-in-out;
+  }
+  .remote-anim :global(.ra-stand) {
+    fill: var(--line);
+  }
+  .remote-anim :global(.ra-label) {
+    fill: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    text-anchor: middle;
+  }
+  .ra-small {
+    fill: var(--muted);
+    font-size: 11px;
+    text-anchor: middle;
+  }
+  .ra-flow {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 2 9;
+    animation: ra-flow 0.9s linear infinite;
+  }
+  .ra-screen {
+    stroke: var(--accent);
+  }
+  .ra-input {
+    stroke: var(--muted);
+    animation-direction: reverse;
+  }
+  @keyframes ra-flow {
+    to {
+      stroke-dashoffset: -22;
+    }
+  }
+  @keyframes ra-move {
+    0%, 8% { transform: translate(150px, 100px); }
+    30%, 38% { transform: translate(40px, 44px); }
+    60%, 72% { transform: translate(98px, 78px); }
+    92%, 100% { transform: translate(150px, 100px); }
+  }
+  @keyframes ra-type {
+    0%, 36% { transform: scaleX(0.05); }
+    58%, 100% { transform: scaleX(1); }
+  }
+  @keyframes ra-press {
+    0%, 62% { opacity: 1; }
+    66% { opacity: 0.55; }
+    72%, 100% { opacity: 1; }
+  }
+  @keyframes ra-click {
+    0%, 61% { opacity: 0; transform: scale(0.3); }
+    63% { opacity: 1; }
+    74%, 100% { opacity: 0; transform: scale(2.2); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .remote-anim :global(*),
+    .ra-flow {
+      animation: none !important;
+    }
+  }
+</style>

@@ -32,13 +32,27 @@ function size(bytes: number) {
 
 type Asset = { name: string; size: number; browser_download_url: string }
 
+// The repo's star count, for the GitHub buttons (0 if GitHub can't be reached).
+export async function starCount(): Promise<number> {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}`, { headers: apiHeaders() })
+    return res.ok ? ((await res.json()).stargazers_count ?? 0) : 0
+  } catch {
+    return 0
+  }
+}
+
+function apiHeaders() {
+  const headers: Record<string, string> = { Accept: 'application/vnd.github+json' }
+  if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
+  return headers
+}
+
 export async function latestRelease(): Promise<Release> {
   let tag = ''
   let assets: Asset[] = []
   try {
-    const headers: Record<string, string> = { Accept: 'application/vnd.github+json' }
-    if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
-    const res = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`, { headers })
+    const res = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`, { headers: apiHeaders() })
     if (res.ok) {
       const body = await res.json()
       tag = body.tag_name ?? ''
